@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest & Staff Dashboard - Grand Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏨</text></svg>">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="index.html" class="brand">
+            <div class="brand-icon">G</div>
+            <div class="brand-text">
+                <h2>Grand Hotel</h2>
+                <span>Luxury & Hospitality</span>
+            </div>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="booking.html" class="btn-nav">Book Now</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Dashboard Profile Header -->
+        <div class="dashboard-header">
+            <div style="display: flex; align-items: center; gap: 18px;">
+                <div class="user-avatar" id="dash-avatar" style="width: 58px; height: 58px; font-size: 24px;">U</div>
+                <div class="user-info-hero">
+                    <h2>Hello, <span id="dash-user-name">Guest</span>!</h2>
+                    <p style="color: #64748b; font-size: 14px;">
+                        <span id="dash-user-email">guest@example.com</span> &bull; 
+                        <span id="dash-user-role" class="badge badge-user">USER</span>
+                    </p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a href="rooms.html" class="btn btn-sm">Reserve New Room</a>
+                <button onclick="logout()" class="btn btn-secondary btn-sm">Log Out</button>
+            </div>
+        </div>
+
+        <!-- Admin Overview Statistics (Shown only for Admin role) -->
+        <div id="admin-section" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">🏨</div>
+                    <div>
+                        <div class="stat-val" id="stat-total-rooms">0</div>
+                        <div class="stat-label">Total Hotel Rooms</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon gold">📑</div>
+                    <div>
+                        <div class="stat-val" id="stat-total-bookings">0</div>
+                        <div class="stat-label">Total Reservations</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">✅</div>
+                    <div>
+                        <div class="stat-val" id="stat-confirmed-bookings">0</div>
+                        <div class="stat-label">Confirmed Stays</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">💰</div>
+                    <div>
+                        <div class="stat-val" id="stat-total-revenue">₹0</div>
+                        <div class="stat-label">Total Revenue</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="my-bookings" onclick="switchDashboardTab('my-bookings')">
+                My Reservations
+            </button>
+            <button class="tab-btn admin-only-tab" data-tab="all-bookings" style="display: none;" onclick="switchDashboardTab('all-bookings')">
+                All Guest Bookings (Admin)
+            </button>
+            <button class="tab-btn admin-only-tab" data-tab="admin-rooms" style="display: none;" onclick="switchDashboardTab('admin-rooms')">
+                Room Management (Admin)
+            </button>
+        </div>
+
+        <!-- Tab 1: My Personal Bookings -->
+        <div id="tab-my-bookings" class="tab-content active">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Accommodation</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="my-bookings-body">
+                        <!-- Populated by script.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab 2: All Bookings (Admin) -->
+        <div id="tab-all-bookings" class="tab-content">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Guest Details</th>
+                            <th>Room</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Total</th>
+                            <th>Status Control</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="all-bookings-body">
+                        <!-- Populated by script.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab 3: Room Management (Admin) -->
+        <div id="tab-admin-rooms" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Hotel Room Inventory</h3>
+                <button onclick="openAddRoomModal()" class="btn btn-sm">➕ Add New Room</button>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room #</th>
+                            <th>Category & Description</th>
+                            <th>Capacity</th>
+                            <th>Nightly Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-rooms-body">
+                        <!-- Populated by script.js -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add New Room -->
+    <div id="add-room-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Room</h3>
+                <button type="button" class="modal-close" onclick="closeAddRoomModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-room-form" onsubmit="handleAddRoomSubmit(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                        <div class="form-group">
+                            <label>Room Number *</label>
+                            <input type="text" id="new-room-number" class="form-control" placeholder="e.g. 401" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Capacity (Guests) *</label>
+                            <input type="number" id="new-room-capacity" class="form-control" value="2" min="1" max="10" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Room Category *</label>
+                        <select id="new-room-type" class="form-control" required>
+                            <option value="Single Deluxe Room">Single Deluxe Room</option>
+                            <option value="Executive Double Room">Executive Double Room</option>
+                            <option value="Luxury Suite">Luxury Suite</option>
+                            <option value="Premium Ocean View Suite">Premium Ocean View Suite</option>
+                            <option value="Royal Family Suite">Royal Family Suite</option>
+                            <option value="Presidential Penthouse Suite">Presidential Penthouse Suite</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price per Night (₹) *</label>
+                        <input type="number" id="new-room-price" class="form-control" placeholder="e.g. 3999" required min="500">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image URL (Optional)</label>
+                        <input type="url" id="new-room-image" class="form-control" placeholder="https://images.unsplash.com/...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="new-room-desc" class="form-control" rows="3" placeholder="Enter amenities, view, or features..."></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" onclick="closeAddRoomModal()" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn">Save Room</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2026 Grand Hotel Management System. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

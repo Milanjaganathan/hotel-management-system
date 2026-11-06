@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Reservation - Grand Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏨</text></svg>">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="index.html" class="brand">
+            <div class="brand-icon">G</div>
+            <div class="brand-text">
+                <h2>Grand Hotel</h2>
+                <span>Luxury & Hospitality</span>
+            </div>
+        </a>
+        <nav>
+            <!-- Rendered dynamically by script.js -->
+            <a href="index.html">Home</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="booking.html" class="active btn-nav">Book Now</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="section-header">
+            <h2>Reserve Your Stay</h2>
+            <p>Complete the form below to secure your suite with instant confirmation.</p>
+        </div>
+
+        <div class="booking-layout">
+            <!-- Left: Booking Form -->
+            <div class="booking-card">
+                <div id="guest-auth-notice">
+                    <!-- Populated by script.js based on auth state -->
+                </div>
+
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="room_id">Select Room / Suite *</label>
+                        <select id="room_id" class="form-control" required>
+                            <option value="">Loading rooms...</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label for="check_in">Check-in Date *</label>
+                            <input type="date" id="check_in" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="check_out">Check-out Date *</label>
+                            <input type="date" id="check_out" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="special_requests">Special Requests / Preferences (Optional)</label>
+                        <textarea id="special_requests" class="form-control" rows="3" placeholder="e.g. Quiet room on high floor, early check-in, dietary preferences..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-booking-btn" class="btn btn-block" style="padding: 14px; font-size: 16px;">
+                        Confirm Reservation
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right: Reservation Summary Card -->
+            <div class="summary-card">
+                <div class="summary-preview">
+                    <img id="summary-img" src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80" alt="Selected Room">
+                </div>
+                <h3 id="summary-room-name" style="font-size: 18px; color: var(--primary); margin-bottom: 12px;">Select a room to view summary</h3>
+
+                <div class="price-row">
+                    <span>Nightly Rate</span>
+                    <span id="summary-rate" style="font-weight: 600;">₹0</span>
+                </div>
+                <div class="price-row">
+                    <span>Duration</span>
+                    <span id="summary-nights" style="font-weight: 600;">0 nights</span>
+                </div>
+                <div class="price-row">
+                    <span>Room Charges</span>
+                    <span id="summary-subtotal">₹0</span>
+                </div>
+                <div class="price-row">
+                    <span>Taxes & Service Fees</span>
+                    <span id="summary-taxes" style="color: var(--success); font-weight: 600;">Included</span>
+                </div>
+                <div class="price-row total-row">
+                    <span>Total Amount</span>
+                    <span id="summary-total">₹0</span>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 13px; color: #64748b;">
+                    <p style="margin-bottom: 6px;">⚡ <strong>Instant Confirmation:</strong> No waiting required.</p>
+                    <p style="margin-bottom: 6px;">🛡️ <strong>Free Cancellation:</strong> Up to 24h prior to check-in.</p>
+                    <p>💳 <strong>Pay at Check-In:</strong> Cash or Card accepted on arrival.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Grand Hotel</h4>
+                <p>Enjoy peaceful stays, luxury dining, and personalized care at our oceanfront property.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="rooms.html">Rooms</a>
+                <a href="booking.html">Booking</a>
+                <a href="dashboard.html">Dashboard</a>
+            </div>
+            <div class="footer-col">
+                <h4>Reservations Desk</h4>
+                <p>📍 100 Marina Boulevard</p>
+                <p>📞 +91 1800 250 8899</p>
+                <p>✉️ concierge@grandhotel.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Grand Hotel Management System. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

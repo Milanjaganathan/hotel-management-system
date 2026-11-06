@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Rooms - Grand Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏨</text></svg>">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="index.html" class="brand">
+            <div class="brand-icon">G</div>
+            <div class="brand-text">
+                <h2>Grand Hotel</h2>
+                <span>Luxury & Hospitality</span>
+            </div>
+        </a>
+        <nav>
+            <!-- Dynamic navbar loaded by script.js -->
+            <a href="index.html">Home</a>
+            <a href="rooms.html" class="active">Rooms</a>
+            <a href="booking.html" class="btn-nav">Book Now</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="section-header">
+            <h2>Explore Our Suites & Rooms</h2>
+            <p>Select your ideal accommodation suited for relaxation, comfort, and productivity.</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <form id="filter-form" class="filter-bar">
+            <div class="search-field">
+                <label for="filter-type">Room Type</label>
+                <select id="filter-type" class="form-control">
+                    <option value="all">All Room Types</option>
+                    <option value="Single Deluxe Room">Single Deluxe</option>
+                    <option value="Executive Double Room">Executive Double</option>
+                    <option value="Luxury Suite">Luxury Suite</option>
+                    <option value="Premium Ocean View Suite">Ocean View Suite</option>
+                    <option value="Royal Family Suite">Royal Family Suite</option>
+                    <option value="Presidential Penthouse Suite">Presidential Penthouse</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <label for="filter-capacity">Capacity</label>
+                <select id="filter-capacity" class="form-control">
+                    <option value="all">Any Capacity</option>
+                    <option value="1">1+ Guest</option>
+                    <option value="2">2+ Guests</option>
+                    <option value="3">3+ Guests</option>
+                    <option value="4">4+ Guests</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <label for="filter-price">Max Price (₹ / night)</label>
+                <select id="filter-price" class="form-control">
+                    <option value="">Any Budget</option>
+                    <option value="2500">Under ₹2,500</option>
+                    <option value="5000">Under ₹5,000</option>
+                    <option value="8000">Under ₹8,000</option>
+                    <option value="12000">Under ₹12,000</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <label for="filter-search">Search Keyword</label>
+                <input type="text" id="filter-search" class="form-control" placeholder="e.g. Balcony, Ocean, Double...">
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+                <button type="submit" class="btn">Filter</button>
+                <button type="button" onclick="resetFilters()" class="btn btn-secondary">Reset</button>
+            </div>
+        </form>
+
+        <!-- Rooms Grid -->
+        <div class="rooms-grid" id="rooms">
+            <!-- Dynamically populated by loadRooms() in script.js -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Grand Hotel</h4>
+                <p>Enjoy memorable stays with five-star luxury suites, high-speed WiFi, spa amenities, and personalized care.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="rooms.html">Rooms</a>
+                <a href="booking.html">Booking</a>
+                <a href="dashboard.html">Dashboard</a>
+            </div>
+            <div class="footer-col">
+                <h4>Customer Support</h4>
+                <p>📍 100 Marina Boulevard</p>
+                <p>📞 +91 1800 250 8899</p>
+                <p>✉️ concierge@grandhotel.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Grand Hotel Management System. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Check URL parameters on initial page load (e.g. ?type=Luxury%20Suite)
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type');
+            if (type) {
+                const typeSelect = document.getElementById('filter-type');
+                if (typeSelect) {
+                    typeSelect.value = type;
+                    loadRooms(`type=${encodeURIComponent(type)}`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
